@@ -327,8 +327,8 @@ async function monitor({
       console.log("----------\n" + message);
 
       // If the job is completed and it has been running for a long time, delete the message so it is reposted as a new message
-      let republish =
-        jobsCompleted && (Date.now() - jobStartAt) / 1000 > longJobDuration;
+      let republish = false;
+        //jobsCompleted && (Date.now() - jobStartAt) / 1000 > longJobDuration;
       sendMessage({ color, republish });
 
       if (jobsCompleted) {
