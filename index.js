@@ -146,10 +146,10 @@ async function monitor({
 
   const updateDescription = (completed, success) => {
     let emoji = "⏳";
-    let prefix = "Building";
+    let prefix = "Deploying";
     if (completed) {
-      emoji = success ? ":ballot_box_with_check:" : ":x:";
-      prefix = success ? "Built" : "Failed to build";
+      emoji = success ? ":white_check_mark:" : ":x:";
+      prefix = success ? "Deployed" : "Failed to deploy";
       durationPrefix = success ? "in" : "after";
     }
 
@@ -174,7 +174,7 @@ async function monitor({
   let running = true;
   process.on("SIGINT", () => {
     running = false;
-    reportFailure("⚠️ Build was cancelled");
+    reportFailure("⚠️ Deploy was cancelled");
   });
 
   let statusStartedAt = new Date();
