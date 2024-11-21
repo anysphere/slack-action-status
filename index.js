@@ -228,8 +228,20 @@ async function monitor({
         (job) => job.status == "pending"
       );
 
+      const inProgressJobs = importantJobs.filter(
+        (job) => job.status == "in_progress"
+      );
+
+      const failedJobs = importantJobs.filter(
+        (job) => job.conclusion == "failure"
+      );
+
       logUrl = (
-        importantJobs.find((j) => j.name.includes(logJobName)) ||
+        importantJobs.find(
+          (j) => logJobName != "" && j.name.includes(logJobName)
+        ) ||
+        inProgressJobs[0] ||
+        failedJobs[0] ||
         importantJobs[0]
       ).html_url;
       jobStartAt = Math.min(...jobs.map((job) => new Date(job.started_at)));
