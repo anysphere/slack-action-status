@@ -282,10 +282,7 @@ async function monitor({
       }
 
       const jobsCompleted = !importantJobs.find(
-        (job) =>
-          job.status == "in_progress" ||
-          job.status == "queued" ||
-          job.status == "pending"
+        (job) => job.status != "completed"
       );
       const allSuccess = !importantJobs.find(
         (job) => job.conclusion != "success" && job.conclusion != "skipped"
